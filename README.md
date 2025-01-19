@@ -127,7 +127,8 @@ Thank you for taking your time in considering my application.
 
 1. Create an Index
 
-``` curl -X POST http://localhost:8080/api/create \
+```
+curl -i -X POST http://localhost:8080/api/create \
 -H "Content-Type: application/json" \
 -d '{
   "indexName": "INDEX_1",
@@ -142,7 +143,7 @@ Thank you for taking your time in considering my application.
 
 2a Add a Share
 ```
-curl -X POST http://localhost:8080/api/indexAdjustment \
+curl -i -X POST http://localhost:8080/api/indexAdjustment \
 -H "Content-Type: application/json" \
 -d '{
   "additionOperation": {
@@ -155,7 +156,7 @@ curl -X POST http://localhost:8080/api/indexAdjustment \
 ```
 2b Delete a Share
 ```
-curl -X POST http://localhost:8080/api/indexAdjustment \
+curl -i -X POST http://localhost:8080/api/indexAdjustment \
 -H "Content-Type: application/json" \
 -d '{
   "deletionOperation": {
@@ -167,7 +168,7 @@ curl -X POST http://localhost:8080/api/indexAdjustment \
 
 2c Apply a Dividend
 ```
-curl -X POST http://localhost:8080/api/indexAdjustment \
+curl -i -X POST http://localhost:8080/api/indexAdjustment \
 -H "Content-Type: application/json" \
 -d '{
   "dividendOperation": {
@@ -178,13 +179,13 @@ curl -X POST http://localhost:8080/api/indexAdjustment \
 ```
 3. Get the State of All Indices
 ```
-curl -X GET http://localhost:8080/api/indexState \
+curl -i -X GET http://localhost:8080/api/indexState \
 -H "Content-Type: application/json"
 ```
 
 4. Get the State of one particular index
 ```
-curl -X GET http://localhost:8080/api/indexState/INDEX_1 \
+curl -i -X GET http://localhost:8080/api/indexState/INDEX_1 \
 -H "Content-Type: application/json"
 ```
 
