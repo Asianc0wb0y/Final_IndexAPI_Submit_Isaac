@@ -106,14 +106,14 @@ This project was developed with the following key design principles:
       •	UnitTest, integration test, and basic concurrency test have been implemented for testing.
       •	Use of Mockmvc to simulate HTTP requests and responses
 
-# Potential Improvement for this challenge
+# What would I improve if I had more time?
 
-  -   Write better ReadMe with format and layout
+  -   Write better ReadMe with format and layout. I am absolutely confident in my presentation skills, however, with the given time limit, I made the choice to focus on the coding and show more about my technical ability rather than on documentation.
   -	Use of custom validators so that validation can be separated from the of business logic implementation.
   -	Deeper analysis on each operation to see if one can use an atomic method such as computerIfAbsent() to further improve the performance due to multiple real-time requests.
   -	More comprehensive test with boundary and edge cases to include extreme values as input, and more versatile performance test on concurrency
   -	JavaDoc to be written for better documentation
-  -	Overall, given the relatively substantial workload on an assignment for a job application, I tried my best to find a balance between code quality and showing you my various skills in development such as implementing the optional part and the use of Enterprise application development practise whenever possible
+  -	Overall, given the relatively substantial workload on an assignment for a job application, I tried to find a balance between code quality and showing you my various skills in development such as implementing the optional part and the use of Enterprise application development practise whenever possible
 
 # Feedback
 
