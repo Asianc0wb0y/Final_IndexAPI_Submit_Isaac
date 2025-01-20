@@ -39,8 +39,6 @@ This project implements a RESTful API for creating and managing financial indice
 | /api/indexState/{indexName}	 | GET | Retrieve the state of a specific index. |
 
     
-
-
 6.	Example cURL commands for testing are provided in the appendix below
 
 ### Alternatively, one can also run it using the .jar file
@@ -55,6 +53,17 @@ There is a jar file in the release just in case you want to test run it directly
 ** Potential bug with IntellJ
 
    Sometimes, IntellJ can have problem with Lombok, make sure you use the Annotation path with the setting “Obtain processors from project classpath”, otherwise there would be issue in building the project.
+
+# Architect
+
+- The engineering principle is to separate API, business logic, and data layers. DTOs (e.g. IndexDTO, ShareDTO) handle API requests and responses, ensuring input validation. 
+
+- Entities (IndexEntity, ShareEntity) represent in-memory data used in the business logic layer. IndexMapper bridges DTOs and entities, handling data transformations. 
+
+- Core operations like adding shares, applying dividends, or retrieving index states are implemented in the IndexService, which ensures thread safety using ReentrantLock. 
+
+- The controller layer exposes RESTful endpoints for seamless interaction with the system.
+
  
 # Assumptions (Developing related)
 
@@ -88,13 +97,15 @@ This project was developed with the following key design principles:
       •	using a mapper ensures that the logic for data transformation is centralized, making the codebase easier to maintain and extend.
       •	Use of MapStruct as seen in the interface IndexMapper for converting between DTOs and Entities with transformation logic at compile time for high performance and simplicity.
 
-2.	Validation Approach (hybrid approach)
+2. Leverages Spring’s Dependency Injection to promote loose coupling and maintainability. Dependencies like IndexService and IndexMapper are injected into classes like IndexController via constructor-based injection. Such modular design is used to reduce boilerplate code and improve scalability.
+
+3.	Multi-Layer Validation Approach
 
       •	Annotations (e.g. @NotBlank, @Positive) for the consumer layer to validate API request inputs directly in the DTO layer as a declarative and centralized way to enforce rules to detect invalid input early on
       •	Custom Exception Handling for service layer (business logic) validation to accommodate for more complex, domain-specific validations (e.g., ensuring indices have at least two members or dividends don’t exceed share prices).
       •	Following industry standard for multi-layer validation
 
-3.	Thread Safety and Concurrency
+4.	Thread Safety and Concurrency
 
       •	Fine-Grained Locking: Used ReentrantLock to ensure that operations are thread-safe and to reduce race occurrence. The use of per-index lock for all (except Dividen operations), instead of locking the whole memory structure with all indices is to increase the performance with multiple requests at the same time.
       •	Deadlock Prevention: For the dividend operations that need access to the whole Index Entity storage in memory, deadlocks could happen if multiple dividend requests are made. Therefore the locks are acquired in a consistent order (e.g., alphabetically by index name) to avoid deadlock
@@ -102,7 +113,7 @@ This project was developed with the following key design principles:
       •	Offers greater flexibility than synchronized, and more fine-grained control.
       •	Allows per-index locking, enabling parallel operations on different indices, and improving scalability.
 
-4.	Testing
+5.	Testing
       •	UnitTest, integration test, and basic concurrency test have been implemented for testing.
       •	Use of Mockmvc to simulate HTTP requests and responses
 
