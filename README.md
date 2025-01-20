@@ -126,6 +126,7 @@ This project was developed with the following key design principles:
 
   + Write better ReadMe with format and layout. I am absolutely confident in my presentation skills, however, with the given time limit, I made the choice to focus on the coding and show more about my technical ability rather than on documentation.
   + Use of custom validators so that validation can be separated from the of business logic implementation.
+  + Some of the concurrency implementation should also focus on the financial / business aspect to find the optimal solution. For instance, S&P 500 index is rebalanced quarterly unless some special incidents such as companies being merged or having bankruptces, therefore the concurrency implementation should not just focus on the technical aspect, but the real world financial situation.
   + Deeper analysis on each operation to see if one can use an atomic method such as computerIfAbsent() to further improve the performance due to multiple real-time requests.
   + More comprehensive test with boundary and edge cases to include extreme values as input, and more versatile performance test on concurrency
   + JavaDoc to be written for better documentation
